@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laundry Service</title>
+      <link href="./output.css" rel="stylesheet">
+
+</head>
+<body class="bg-white ">
+    <nav class="bg-white text-black sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+
+                <!-- Logo -->
+                <div class="text-xl font-semibold relative">
+                    Logo
+                </div>
+
+                <!-- Hamburger Button -->
+                <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none" aria-label="Toggle menu">
+                    ☰
+                </button>
+
+                <!-- Desktop Menu -->
+                <ul id="menu" class="hidden md:flex space-x-6">
+                    <li>
+                        <a href="#home" class="hover:text-sky-400 transition">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about" class="hover:text-sky-400 transition">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#services" class="hover:text-sky-400 transition">Services</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="hover:text-sky-400 transition">Contact Us</a>
+                    </li>
+                </ul>
+                <div class="hidden md:block border rounded-2xl bg-blue-600 text-white px-4 py-2">
+                    Username
+                </div>
+
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <ul class="flex flex-col space-y-4">
+                    <li>
+                        <a href="#home" class="block hover:text-sky-400 transition py-2">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about" class="block hover:text-sky-400 transition py-2">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#services" class="block hover:text-sky-400 transition py-2">Services</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="block hover:text-sky-400 transition py-2">Contact Us</a>
+                    </li>
+                    <li>
+                        <div class="border rounded-2xl bg-blue-600 text-white px-4 py-2 text-center">
+                            Username
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <section id="home" class="py-8 sm:py-12 md:py-16 bg-gray-50 m-4 sm:m-8 md:m-15">
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+
+                <!-- Text Section -->
+                <div class="text-center md:text-left w-full md:w-1/2">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 font-poppins">
+                        Revitalize Your <br>Clothes with Expert
+                    </h1>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-600 font-poppins">Laundry
+                        Services!</h1>
+
+                    <p class="mt-4 text-sm sm:text-base md:text-lg text-black">
+                        From premium dry cleaning to swift wash and fold, we <br class="hidden md:block">
+                        deliver care and convenience. Schedule a pickup and <br class="hidden md:block">
+                        rediscover the freshness of your clothes today!
+                    </p>
+                    <a href="#services">
+
+                    <button
+                        class="mt-6 sm:mt-8 md:mt-10 border rounded-2xl bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base hover:bg-blue-700 transition">🗓️Book
+                        a service today!</button>
+                        </a>
+
+                </div>
+
+                <!-- Image Section -->
+                <div class="w-full md:w-1/2 flex justify-center p-4 md:p-6">
+                    <img src="images/pngtree-set-of-doodle-laundry-vector-illustration-png-image_2332909.jpg"
+                        alt="Laundry Illustration" class="w-full max-w-md h-auto md:max-w-lg object-cover 
+           rounded-2xl
+           shadow-2xl 
+           border-4 border-slate-300" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Achievements" class="mx-4 sm:mx-6 md:mx-10 px-4 py-6 border rounded-xl bg-blue-400">
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+
+            <!-- Left Side Title -->
+            <div class="w-full md:w-1/4 text-center md:text-left">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">
+                    Our Achievements
+                </h3>
+            </div>
+
+            <!-- Right Side Achievements -->
+            <div class="w-full md:w-3/4">
+                <ul class="flex flex-col sm:flex-row justify-between text-center gap-4 sm:gap-6">
+
+                    <li>
+                        <h4 class="text-2xl sm:text-3xl font-extrabold text-slate-900">15+</h4>
+                        <p class="text-sm sm:text-base text-slate-900">Laundry Services</p>
+                    </li>
+
+                    <li>
+                        <h4 class="text-2xl sm:text-3xl font-extrabold text-slate-900">240+</h4>
+                        <p class="text-sm sm:text-base text-slate-900">Happy Customers</p>
+                    </li>
+
+                    <li>
+                        <h4 class="text-2xl sm:text-3xl font-extrabold text-slate-900">2+</h4>
+                        <p class="text-sm sm:text-base text-slate-900">Years Experience</p>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="services" class="min-h-screen flex items-center justify-center py-8 px-4">
+
+        <section
+            class="bg-white shadow-xl rounded-xl w-full max-w-6xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+            <!-- SERVICES SECTION -->
+            <section class="w-full">
+                <h2 class="text-xl sm:text-2xl font-bold mb-4">Our Services</h2>
+                <p class="text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
+                    Click on Add to Cart to cart Button To Add The Service To Your Cart
+                </p>
+
+                <section id="services-list" class="space-y-4"></section>
+                <p id="msg" class="text-blue-500 text-xs sm:text-sm mt-4"></p>
+            </section>
+
+            <!-- CART & BOOKING SECTION -->
+            <section class="bg-white p-4 rounded-lg w-full">
+
+                <h2 class="text-lg sm:text-xl font-semibold mt-5 text-center">Added Items</h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs sm:text-sm mb-4 mt-9">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="text-left py-2">N.Service Name</th>
+                                <th class="text-right py-2">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart"></tbody>
+                    </table>
+                </div>
+
+                <section class="flex justify-between font-bold mb-4 sm:mb-6 text-sm sm:text-base">
+                    <span>Total Amount</span>
+                    <span>₹ <span id="total">0</span></span>
+                </section>
+
+                <!-- BOOK FORM -->
+                <section>
+                    <h3 class="font-semibold mb-2 text-sm sm:text-base">Book Now</h3>
+
+                    <input id="booking-name" type="text" placeholder="Full Name"
+                        class="w-full mb-2 px-3 py-2 border rounded text-sm sm:text-base" />
+
+                    <input id="booking-email" type="email" placeholder="Email ID"
+                        class="w-full mb-2 px-3 py-2 border rounded text-sm sm:text-base" />
+
+                    <input id="booking-phone" type="tel" placeholder="Phone Number"
+                        class="w-full mb-4 px-3 py-2 border rounded text-sm sm:text-base" />
+
+                    <button onclick="bookNow()"
+                        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 text-sm sm:text-base transition">
+                        Book Now
+                    </button>
+                    <p id="booking-status" class="mt-2 text-xs sm:text-sm"></p>
+                </section>
+
+            </section>
+
+        </section>
+    </section>
+
+    <!-- Features Section -->
+    <section id="about" class="w-full py-8 sm:py-12 md:py-16">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 text-center">
+
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-2">
+                    <img src="images/illustration-laundry-basket-ontinuous-line-drawing-with-black-lines-silhouette-white-back_1032986-294128.avif"
+                        class="h-16 w-20 sm:h-20 sm:w-24 mx-auto object-contain" alt="Laundry Basket">
+                </div>
+
+                <h3 class="font-semibold text-base sm:text-lg">Premium Services</h3>
+                <h2 class="font-semibold text-sm sm:text-base">About us</h2>
+
+                <p class="text-xs sm:text-sm text-gray-600 mt-2">
+                    Our premium laundry service ensures expert fabric care using advanced cleaning techniques and
+                    high-quality detergents with a fresh, long-lasting finish.
+                </p>
+            </div>
+
+
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-2">
+                    <img src="images/download.jpg" class="h-16 w-20 sm:h-20 sm:w-24 mx-auto object-contain"
+                        alt="support">
+                </div>
+
+                <h3 class="font-semibold text-base sm:text-lg">Quick Support</h3>
+
+                <p class="text-xs sm:text-sm text-gray-600 mt-2">
+                    Our quick support team is always ready to assist you with fast, reliable, and friendly service
+                    whenever you need help.
+                </p>
+            </div>
+
+
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-2">
+                    <img src="images/istockphoto-524174823-612x612.jpg"
+                        class="h-16 w-20 sm:h-20 sm:w-24 mx-auto object-contain" alt="deliver">
+                </div>
+
+                <h3 class="font-semibold text-base sm:text-lg">Hassle Free Delivery</h3>
+
+                <p class="text-xs sm:text-sm text-gray-600 mt-2">
+                    Enjoy hassle-free delivery with on-time pickup and drop, ensuring your clothes reach you fresh and
+                    worry-free.
+                </p>
+            </div>
+
+
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-2">
+                    <img src="images/pngtree-set-of-doodle-laundry-vector-illustration-png-image_2332909.jpg"
+                        class="h-16 w-20 sm:h-20 sm:w-24 mx-auto object-contain" alt="money">
+                </div>
+                <h3 class="font-semibold text-base sm:text-lg">Affordable Prices</h3>
+                <p class="text-xs sm:text-sm text-gray-600 mt-2">
+                    We offer affordable prices with high-quality laundry care, giving you the best value without
+                    compromising on service.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="w-full bg-linear-to-r from-blue-700 to-blue-500 py-8 sm:py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-4 sm:gap-6">
+
+            <h2 class="text-white text-xl sm:text-2xl font-semibold w-full md:w-1/3 text-center md:text-left">
+                Subscribe to our <br>newsletter.
+            </h2>
+
+            <div class="flex flex-col sm:flex-row w-full md:w-2/3 gap-3 sm:gap-4">
+                <input type="text" placeholder="Full name"
+                    class="w-full px-4 py-2 rounded outline-none bg-white text-sm sm:text-base" />
+                <input type="email" placeholder="Email"
+                    class="w-full px-4 py-2 rounded outline-none bg-white text-sm sm:text-base" />
+                <button
+                    class="w-full sm:w-auto bg-white text-blue-600 px-6 py-2 rounded font-semibold hover:bg-gray-100 transition text-sm sm:text-base">
+                    Subscribe
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="w-full bg-gray-100 py-8 sm:py-10 md:py-14">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10">
+
+            <!-- Logo -->
+            <div class="text-center sm:text-left">
+                <h3 class="text-base sm:text-lg font-bold">Logo</h3>
+                <h2 class="font-semibold text-sm sm:text-base">About us</h2>
+                <p class="text-xs sm:text-sm text-gray-600 mt-3">
+
+                    We are committed to providing reliable and high-quality laundry services with expert care, modern
+                    cleaning techniques, and timely delivery. Our goal is to make laundry effortless, affordable, and
+                    stress-free for every customer.
+                </p>
+            </div>
+
+            <!-- Important Links -->
+            <div class="text-center sm:text-left">
+                <h4 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Important Links</h4>
+                <ul class="space-y-2 text-xs sm:text-sm text-gray-600">
+                    <li><a href="#about" class="hover:text-blue-600 transition">About us</a></li>
+                    <li><a href="#contact" class="hover:text-blue-600 transition">Contact us</a></li>
+                    <li>Privacy Policy</li>
+                    <li>Terms of use</li>
+                    <li>Refund Policy</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="text-center sm:text-left">
+                <h4 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Contact</h4>
+                <p class="text-xs sm:text-sm text-gray-600 wrap-break-word"> <a class="text-blue-600 hover:underline"
+                        href="mailto:ajeetgupta80045@gmail.com">ajeetgupta80045@gmail.com</a> </p>
+                <p class="text-xs sm:text-sm text-gray-600">+91 8787095611</p>
+            </div>
+
+            <!-- Follow Us -->
+            <div class="text-center sm:text-left">
+                <h4 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Follow Us</h4>
+                <div class="flex gap-4 text-lg sm:text-xl justify-center sm:justify-start">
+                    <span class="font-bold"> <a href="https://www.instagram.com/_ajeetgupta_07/"
+                            class="hover:text-blue-600 transition">🅾</a></span>
+                    <span class="font-bold hover:text-blue-600 transition cursor-pointer">ⓕ</span>
+                    <span class="font-bold hover:text-blue-600 transition cursor-pointer">𝕏</span>
+                    <span class="font-bold hover:text-blue-600 transition"><a
+                            href="https://www.linkedin.com/in/ajeet-gupta-970478273/">lınkedln</a></span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
