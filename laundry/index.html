@@ -163,15 +163,15 @@
             </section>
 
             <!-- CART & BOOKING SECTION -->
-            <section class="bg-gray-100 p-4 rounded-lg w-full">
+            <section class="bg-white p-4 rounded-lg w-full">
 
-                <h2 class="text-lg sm:text-xl font-semibold mb-4 text-center">Added Items</h2>
+                <h2 class="text-lg sm:text-xl font-semibold mt-5 text-center">Added Items</h2>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full text-xs sm:text-sm mb-4">
+                    <table class="w-full text-xs sm:text-sm mb-4 mt-9">
                         <thead>
                             <tr class="border-b">
-                                <th class="text-left py-2">S.No Service Name</th>
+                                <th class="text-left py-2">N.Service Name</th>
                                 <th class="text-right py-2">Price</th>
                             </tr>
                         </thead>
@@ -188,19 +188,20 @@
                 <section>
                     <h3 class="font-semibold mb-2 text-sm sm:text-base">Book Now</h3>
 
-                    <input type="text" placeholder="Full Name"
+                    <input id="booking-name" type="text" placeholder="Full Name"
                         class="w-full mb-2 px-3 py-2 border rounded text-sm sm:text-base" />
 
-                    <input type="email" placeholder="Email ID"
+                    <input id="booking-email" type="email" placeholder="Email ID"
                         class="w-full mb-2 px-3 py-2 border rounded text-sm sm:text-base" />
 
-                    <input type="tel" placeholder="Phone Number"
+                    <input id="booking-phone" type="tel" placeholder="Phone Number"
                         class="w-full mb-4 px-3 py-2 border rounded text-sm sm:text-base" />
 
                     <button onclick="bookNow()"
                         class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 text-sm sm:text-base transition">
                         Book Now
                     </button>
+                    <p id="booking-status" class="mt-2 text-xs sm:text-sm"></p>
                 </section>
 
             </section>

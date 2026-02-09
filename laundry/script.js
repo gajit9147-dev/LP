@@ -12,6 +12,26 @@ const servicesData = [
   const servicesDiv = document.getElementById("services-list");
   const cartBody = document.getElementById("cart");
   const totalSpan = document.getElementById("total");
+  const bookingNameInput = document.getElementById("booking-name");
+  const bookingEmailInput = document.getElementById("booking-email");
+  const bookingPhoneInput = document.getElementById("booking-phone");
+  const bookingMessage = document.getElementById("msg");
+  const bookingStatus = document.getElementById("booking-status");
+  const bookingRecipientEmail = "ajeetgupta80045@gmail.com";
+
+  function setBookingStatus(message, tone) {
+    bookingStatus.classList.remove("text-red-600", "text-green-600");
+    bookingStatus.style.color = "";
+    if (tone === "warning") {
+      bookingStatus.classList.add("text-red-600");
+      bookingStatus.style.color = "#dc2626";
+    }
+    if (tone === "success") {
+      bookingStatus.classList.add("text-green-600");
+      bookingStatus.style.color = "#16a34a";
+    }
+    bookingStatus.innerText = message;
+  }
 
   function renderServices() {
     servicesDiv.innerHTML = "";
@@ -68,15 +88,46 @@ const servicesData = [
 
   function bookNow() {
     if (cart.length === 0) {
-      alert("Please add at least one service!");
+      setBookingStatus("ⓘ Add the item to the cart to book", "warning");
       return;
     }
-    alert("Booking Successful! Total: ₹" + totalSpan.innerText);
+
+    const name = bookingNameInput.value.trim();
+    const email = bookingEmailInput.value.trim();
+    const phone = bookingPhoneInput.value.trim();
+
+    if (!name || !email || !phone) {
+      setBookingStatus("ⓘPlease fill in your name, email, and phone number.", "warning");
+      return;
+    }
+
+    const itemsList = cart
+      .map(item => encodeURIComponent(`- ${item.name} (₹${item.price})`))
+      .join("%0A");
+    const total = totalSpan.innerText;
+    const subject = encodeURIComponent("New Laundry Booking");
+    const body =
+      `Name: ${encodeURIComponent(name)}%0A` +
+      `Email: ${encodeURIComponent(email)}%0A` +
+      `Phone: ${encodeURIComponent(phone)}%0A%0A` +
+      `Services:%0A${itemsList}%0A%0A` +
+      `Total: ₹${encodeURIComponent(total)}`;
+
+    window.location.href = `mailto:${bookingRecipientEmail}?subject=${subject}&body=${body}`;
+
+    cart.length = 0;
+    bookingNameInput.value = "";
+    bookingEmailInput.value = "";
+    bookingPhoneInput.value = "";
+    updateCart();
+
+    setBookingStatus("Email has been send succesfully", "success");
   }
 
   renderServices();
 
-  document.getElementById("msg").innerText = "ℹ️ Add this item to cart and book now ";
+  bookingMessage.innerText = "ℹ️ Add this item to cart and book now ";
+  setBookingStatus("", "");
 
   // Hamburger menu toggle
   document.getElementById("menu-toggle").addEventListener("click", function() {
