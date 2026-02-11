@@ -18,6 +18,7 @@ const servicesData = [
   const bookingMessage = document.getElementById("msg");
   const bookingStatus = document.getElementById("booking-status");
   const bookingRecipientEmail = "ajeetgupta80045@gmail.com";
+  const bookNowButton = document.getElementById("book-now");
 
   function setBookingStatus(message, tone) {
     bookingStatus.classList.remove("text-red-600", "text-green-600");
@@ -72,6 +73,19 @@ const servicesData = [
     cartBody.innerHTML = "";
     let total = 0;
 
+    if (cart.length === 0) {
+      cartBody.innerHTML = `
+        <tr>
+          <td colspan="2" class="text-center text-gray-500 py-3">
+            No items added
+          </td>
+        </tr>
+      `;
+      totalSpan.innerText = "0";
+      renderServices();
+      return;
+    }
+
     cart.forEach(item => {
       total += item.price;
       cartBody.innerHTML += `
@@ -86,9 +100,9 @@ const servicesData = [
     renderServices();
   }
 
-  function bookNow() {
+  async function bookNow() {
     if (cart.length === 0) {
-      setBookingStatus("ⓘ Add the item to the cart to book", "warning");
+      setBookingStatus("No items added", "warning");
       return;
     }
 
@@ -113,18 +127,55 @@ const servicesData = [
       `Services:%0A${itemsList}%0A%0A` +
       `Total: ₹${encodeURIComponent(total)}`;
 
-    window.location.href = `mailto:${bookingRecipientEmail}?subject=${subject}&body=${body}`;
+    const payload = {
+      name,
+      email,
+      phone,
+      services: cart.map(item => `${item.name} (₹${item.price})`).join(", "),
+      total: `₹${total}`,
+      _subject: "New Laundry Booking",
+      _template: "table"
+    };
 
-    cart.length = 0;
-    bookingNameInput.value = "";
-    bookingEmailInput.value = "";
-    bookingPhoneInput.value = "";
-    updateCart();
+    try {
+      if (bookNowButton) {
+        bookNowButton.disabled = true;
+        bookNowButton.classList.add("opacity-70", "cursor-not-allowed");
+      }
 
-    setBookingStatus("Email has been send succesfully", "success");
+      setBookingStatus("Sending email...", "");
+
+      const response = await fetch(`https://formsubmit.co/ajax/${bookingRecipientEmail}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Email request failed");
+      }
+
+      cart.length = 0;
+      bookingNameInput.value = "";
+      bookingEmailInput.value = "";
+      bookingPhoneInput.value = "";
+      updateCart();
+
+      setBookingStatus("Email sent successfully", "success");
+    } catch (error) {
+      setBookingStatus("Email could not be sent. Please try again.", "warning");
+    } finally {
+      if (bookNowButton) {
+        bookNowButton.disabled = false;
+        bookNowButton.classList.remove("opacity-70", "cursor-not-allowed");
+      }
+    }
   }
 
-  renderServices();
+  updateCart();
 
   bookingMessage.innerText = "ℹ️ Add this item to cart and book now ";
   setBookingStatus("", "");
