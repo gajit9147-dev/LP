@@ -10,7 +10,9 @@ const servicesData = [
   { name: "Wedding Dress Cleaning", price: 2800 }
 ];
 
-const ADMIN_EMAIL = "ajeetgupta80045@gmail.com";
+const EMAILJS_PUBLIC_KEY = "bd6ABxWAzjnF8vN4T";
+const EMAILJS_SERVICE_ID = "service_rqdd82j";
+const EMAILJS_CUSTOMER_TEMPLATE_ID = "template_wmoba23";
 
 /* ===============================
    🛒 CART + ELEMENTS
@@ -26,6 +28,10 @@ const bookingPhoneInput = document.getElementById("booking-phone");
 const bookingMessage = document.getElementById("msg");
 const bookingStatus = document.getElementById("booking-status");
 const bookNowButton = document.getElementById("book-now");
+
+if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_EMAILJS_PUBLIC_KEY") {
+  window.emailjs.init(EMAILJS_PUBLIC_KEY);
+}
 
 /* ===============================
    STATUS MESSAGE FUNCTION
@@ -45,6 +51,33 @@ function setBookingStatus(message, tone) {
   }
 
   bookingStatus.innerText = message;
+}
+
+function getEmailJsErrorMessage(error) {
+  if (!error) return "Unknown email error";
+
+  if (typeof error === "string") return error;
+
+  const text = error.text ? String(error.text) : "";
+  const status = error.status ? ` (${error.status})` : "";
+
+  if (text) return `${text}${status}`;
+
+  if (error.message) return String(error.message);
+
+  return "Unknown email error";
+}
+
+function isUnsetConfig(value, placeholder) {
+  return !value || value.trim() === "" || value === placeholder;
+}
+
+function isValidServiceId(value) {
+  return typeof value === "string" && value.startsWith("service_");
+}
+
+function isValidTemplateId(value) {
+  return typeof value === "string" && value.startsWith("template_");
 }
 
 /* ===============================
@@ -142,49 +175,49 @@ async function bookNow() {
     .map(item => `${item.name}`)
     .join(", ");
 
+  if (!window.emailjs) {
+    setBookingStatus("Email service unavailable. Try again later.", "warning");
+    return;
+  }
+
+  if (
+    isUnsetConfig(EMAILJS_PUBLIC_KEY, "YOUR_EMAILJS_PUBLIC_KEY") ||
+    isUnsetConfig(EMAILJS_SERVICE_ID, "YOUR_EMAILJS_SERVICE_ID") ||
+    isUnsetConfig(EMAILJS_CUSTOMER_TEMPLATE_ID, "YOUR_EMAILJS_CUSTOMER_TEMPLATE_ID")
+  ) {
+    setBookingStatus("Set valid EmailJS Public Key, Service ID, and Customer Template ID.", "warning");
+    return;
+  }
+
+  if (
+    !isValidServiceId(EMAILJS_SERVICE_ID) ||
+    !isValidTemplateId(EMAILJS_CUSTOMER_TEMPLATE_ID)
+  ) {
+    setBookingStatus("Invalid EmailJS ID format. Use service_* for Service ID and template_* for Customer Template ID.", "warning");
+    return;
+  }
+
+  const baseTemplateParams = {
+    customer_name: name,
+    customer_email: email,
+    customer_phone: phone,
+    services_booked: servicesSelected,
+    total_price: `₹${total}`
+  };
+
   try {
     bookNowButton.disabled = true;
     setBookingStatus("Sending booking...", "");
 
-    /* EMAIL → ADMIN */
-    await fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        services: servicesSelected,
-        total: `₹${total}`,
-        _subject: "New Laundry Booking",
-        message: `
-Items: ${servicesSelected}
-Total: ₹${total}
-
-Thank you for booking.
-        `
-      })
-    });
-
-    /* EMAIL → CUSTOMER */
-    await fetch(`https://formsubmit.co/ajax/${email}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        services: servicesSelected,
-        total: `₹${total}`,
-        _subject: "Laundry Booking Confirmation",
-        message: `
-Items: ${servicesSelected}
-Total Amount: ₹${total}
-
-Thank you for booking with us.
-        `
-      })
-    });
+    await window.emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_CUSTOMER_TEMPLATE_ID,
+      {
+        ...baseTemplateParams,
+        to_email: email,
+        subject: "Laundry Booking Confirmation"
+      }
+    );
 
     // clear cart
     cart.length = 0;
@@ -196,7 +229,8 @@ Thank you for booking with us.
     setBookingStatus("Booking successful! Email sent.", "success");
 
   } catch (error) {
-    setBookingStatus("Booking failed. Try again.", "warning");
+    const reason = getEmailJsErrorMessage(error);
+    setBookingStatus(`Booking failed: ${reason}`, "warning");
   } finally {
     bookNowButton.disabled = false;
   }
