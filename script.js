@@ -98,7 +98,7 @@ function renderServices() {
         <button
           onclick="${isAdded ? `removeItem(${index})` : `addItem(${index})`}"
           class="px-3 py-1 text-sm rounded
-          ${isAdded ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}">
+          ${isAdded ? "bg-red-500 text-white" : "bg-green-500 text-white"}">
           ${isAdded ? "Remove item ⊖ " : "Add item ⊕ "}
         </button>
       </section>
@@ -115,7 +115,7 @@ function addItem(index) {
 }
 
 function removeItem(index) {
-  const i = cart.findIndex(s => s === servicesData[index]);
+  const i = cart.findIndex((s) => s === servicesData[index]);
   if (i > -1) cart.splice(i, 1);
   updateCart();
 }
@@ -137,7 +137,7 @@ function updateCart() {
     return;
   }
 
-  cart.forEach(item => {
+  cart.forEach((item) => {
     total += item.price;
     cartBody.innerHTML += `
       <tr>
@@ -171,9 +171,7 @@ async function bookNow() {
 
   const total = totalSpan.innerText;
 
-  const servicesSelected = cart
-    .map(item => `${item.name}`)
-    .join(", ");
+  const servicesSelected = cart.map((item) => `${item.name}`).join(", ");
 
   if (!window.emailjs) {
     setBookingStatus("Email service unavailable. Try again later.", "warning");
@@ -185,15 +183,18 @@ async function bookNow() {
     isUnsetConfig(EMAILJS_SERVICE_ID, "YOUR_EMAILJS_SERVICE_ID") ||
     isUnsetConfig(EMAILJS_CUSTOMER_TEMPLATE_ID, "YOUR_EMAILJS_CUSTOMER_TEMPLATE_ID")
   ) {
-    setBookingStatus("Set valid EmailJS Public Key, Service ID, and Customer Template ID.", "warning");
+    setBookingStatus(
+      "Set valid EmailJS Public Key, Service ID, and Customer Template ID.",
+      "warning"
+    );
     return;
   }
 
-  if (
-    !isValidServiceId(EMAILJS_SERVICE_ID) ||
-    !isValidTemplateId(EMAILJS_CUSTOMER_TEMPLATE_ID)
-  ) {
-    setBookingStatus("Invalid EmailJS ID format. Use service_* for Service ID and template_* for Customer Template ID.", "warning");
+  if (!isValidServiceId(EMAILJS_SERVICE_ID) || !isValidTemplateId(EMAILJS_CUSTOMER_TEMPLATE_ID)) {
+    setBookingStatus(
+      "Invalid EmailJS ID format. Use service_* for Service ID and template_* for Customer Template ID.",
+      "warning"
+    );
     return;
   }
 
@@ -209,15 +210,11 @@ async function bookNow() {
     bookNowButton.disabled = true;
     setBookingStatus("Sending booking...", "");
 
-    await window.emailjs.send(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_CUSTOMER_TEMPLATE_ID,
-      {
-        ...baseTemplateParams,
-        to_email: email,
-        subject: "Laundry Booking Confirmation"
-      }
-    );
+    await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CUSTOMER_TEMPLATE_ID, {
+      ...baseTemplateParams,
+      to_email: email,
+      subject: "Laundry Booking Confirmation"
+    });
 
     // clear cart
     cart.length = 0;
@@ -227,7 +224,6 @@ async function bookNow() {
     updateCart();
 
     setBookingStatus("Booking successful! Email sent.", "success");
-
   } catch (error) {
     const reason = getEmailJsErrorMessage(error);
     setBookingStatus(`Booking failed: ${reason}`, "warning");
@@ -246,13 +242,13 @@ setBookingStatus("", "");
 /* ===============================
    MOBILE MENU
 ================================ */
-document.getElementById("menu-toggle").addEventListener("click", function() {
+document.getElementById("menu-toggle").addEventListener("click", function () {
   const mobileMenu = document.getElementById("mobile-menu");
   mobileMenu.classList.toggle("hidden");
 });
 
-document.querySelectorAll("#mobile-menu a").forEach(link => {
-  link.addEventListener("click", function() {
+document.querySelectorAll("#mobile-menu a").forEach((link) => {
+  link.addEventListener("click", function () {
     document.getElementById("mobile-menu").classList.add("hidden");
   });
 });
