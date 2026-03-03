@@ -181,6 +181,9 @@
               id="booking-name"
               type="text"
               placeholder="Full Name"
+              required
+              pattern="^[A-Za-z][A-Za-z\s'.-]{1,49}$"
+              title="Enter a valid full name (2-50 characters, letters and spaces)."
               class="w-full mb-2 px-3 py-2 border rounded text-sm sm:text-base"
             />
 
@@ -188,6 +191,7 @@
               id="booking-email"
               type="email"
               placeholder="Email ID"
+              required
               class="w-full mb-2 px-3 py-2 border rounded text-sm sm:text-base"
             />
 
@@ -195,6 +199,9 @@
               id="booking-phone"
               type="tel"
               placeholder="Phone Number"
+              required
+              pattern="^\+?[0-9\s\-()]{10,20}$"
+              title="Enter a valid phone number (10-15 digits, optional +, spaces, -, or parentheses)"
               class="w-full mb-4 px-3 py-2 border rounded text-sm sm:text-base"
             />
 

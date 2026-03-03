@@ -80,6 +80,23 @@ function isValidTemplateId(value) {
   return typeof value === "string" && value.startsWith("template_");
 }
 
+function isValidName(name) {
+  return /^[A-Za-z][A-Za-z\s'.-]{1,49}$/.test(name);
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function isValidPhone(phone) {
+  if (!/^\+?[0-9\s\-()]+$/.test(phone)) {
+    return false;
+  }
+
+  const digitsOnly = phone.replace(/\D/g, "");
+  return digitsOnly.length >= 10 && digitsOnly.length <= 15;
+}
+
 /* ===============================
    RENDER SERVICES
 ================================ */
@@ -166,6 +183,21 @@ async function bookNow() {
 
   if (!name || !email || !phone) {
     setBookingStatus("Please fill all details.", "warning");
+    return;
+  }
+
+  if (!isValidName(name)) {
+    setBookingStatus("Please enter a valid full name.", "warning");
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    setBookingStatus("Please enter a valid email address.", "warning");
+    return;
+  }
+
+  if (!isValidPhone(phone)) {
+    setBookingStatus("Please enter a valid phone number.", "warning");
     return;
   }
 
